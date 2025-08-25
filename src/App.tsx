@@ -1,10 +1,13 @@
 import Header from "@components/Header/Header";
+import MainLayout from "@components/Layout/Layout";
+
 function App() {
   return ( 
-    <div className="App">
+    <>
+    <MainLayout>
       <Header />
-      <h1>Hello World!</h1>
-    </div>
+    </MainLayout>
+    </>
    );
 }
 

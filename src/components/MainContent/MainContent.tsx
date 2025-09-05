@@ -1,11 +1,27 @@
 import ContentItem from "@components/ContentItem/ContenItem";
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
+interface Course {
+    id: number;
+    subject: string;
+    courseName: string;
+    programName: string;
+    classSize: number;
+    startDate: string;
+    endDate: string;
+    status: string;
+}
 
-function MainContent() {
+interface MainContentProps {
+    courses: Course[];
+}
+
+function MainContent({ courses }: MainContentProps) {
     const { Maincontainer } = styles;
-    return ( 
+    return (
         <div className={Maincontainer}>
-            <ContentItem />
+            {courses.map((course) => (
+                <ContentItem key={course.id} course={course} />
+            ))}
         </div>
     );
 }

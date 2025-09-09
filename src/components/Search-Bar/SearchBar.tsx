@@ -1,9 +1,13 @@
 import styles from "./styles.module.scss";
-function SearchBar() {
-    const { searchBar } = styles;
+interface SearchBarProps {
+    onSearchChange: (value: string) => void;
+    SearTerm: string;
+}
+
+function SearchBar({onSearchChange, SearTerm}: SearchBarProps) {
     return (
-        <div className={searchBar}>
-            <input type='text' placeholder='Tìm kiếm lớp...' />
+        <div className={styles.searchBar}>
+            <input type='text' placeholder='Tìm kiếm lớp...' value={SearTerm} onChange={(e) => onSearchChange(e.target.value)} />
         </div>
     );
 }

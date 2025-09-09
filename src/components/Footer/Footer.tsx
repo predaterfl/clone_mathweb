@@ -13,17 +13,19 @@ interface course {
 
 interface FooterProps {
     courses: course[];
+    filter: string;
 }
-function Footer({ courses }: FooterProps) {
-    const TotalClass = courses.length;
-    const { container } = styles;
+const Footer: React.FC<FooterProps> = ({ courses, filter }) => {
+    const filteredCourses =
+        filter === "Tất cả"
+            ? courses
+            : courses.filter((c) => c.status === filter);
+
     return (
-        <div className={container}>
-            <div>
-                Tổng số lớp: <span>{TotalClass}</span>
-            </div>
+        <div className={styles.container}>
+            Tổng số lớp: <span>{filteredCourses.length}</span>
         </div>
     );
-}
+};
 
 export default Footer;

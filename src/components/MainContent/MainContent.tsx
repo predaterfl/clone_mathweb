@@ -13,23 +13,12 @@ interface Course {
 
 interface MainContentProps {
     courses: Course[];
-    filter: string;
-    SearchTerm: string;
 }
 
-function MainContent({ courses, filter, SearchTerm }: MainContentProps) {
-
-    const filteredCourses = courses.filter((c) => {
-        const matchFilter = filter === "Tất cả" || c.status === filter;
-        const matchSearch = c.subject
-            .toLowerCase()
-            .includes(SearchTerm.toLowerCase());
-        return matchFilter && matchSearch;
-    });
-
+function MainContent({ courses }: MainContentProps) {
     return (
         <div className={styles.Maincontainer}>
-            {filteredCourses.map((course) => (
+            {courses.map((course) => (
                 <ContentItem key={course.id} course={course} />
             ))}
         </div>

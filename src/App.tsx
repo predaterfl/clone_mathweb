@@ -5,11 +5,13 @@ import HeadingContent from "@components/HeadingContent/HeadingContent";
 import MainContent from "@components/MainContent/MainContent";
 import Footer from "@components/Footer/Footer";
 import { fakeCourses } from "./FakeData";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function App() {
     const [SearchTerm, setSearTerm] = useState<string>("");
     const [filter, setFilter] = useState<string>("Tất cả");
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const pageSize = 10;
 
     const totalCounts = {
         all: fakeCourses.length,
@@ -21,6 +23,26 @@ function App() {
             .length,
         cancelled: fakeCourses.filter((c) => c.status === "Đã hủy").length,
     };
+
+    const filteredCourses = useMemo(() => {
+        return fakeCourses.filter((c) => {
+            const matchFilter = filter === "Tất cả" || c.status === filter;
+            const matchSearch = c.subject
+                .toLowerCase()
+                .includes(SearchTerm.toLowerCase());
+            return matchFilter && matchSearch;
+        });
+    }, [filter, SearchTerm]);
+    const totalPages = Math.ceil(filteredCourses.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const paginatedCourses = filteredCourses.slice(
+        startIndex,
+        startIndex + pageSize,
+    );
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filter, SearchTerm]);
+
     return (
         <>
             <MainLayout>
@@ -34,12 +56,14 @@ function App() {
                     onSearchChange={setSearTerm}
                 />
                 <HeadingContent />
-                <MainContent
+                <MainContent courses={paginatedCourses} />
+                <Footer
                     courses={fakeCourses}
                     filter={filter}
-                    SearchTerm={SearchTerm}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onChangePage={setCurrentPage}
                 />
-                <Footer courses={fakeCourses} filter={filter} />
             </MainLayout>
         </>
     );

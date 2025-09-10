@@ -8,7 +8,7 @@ import { fakeCourses } from "./FakeData";
 import { useState } from "react";
 
 function App() {
-    const [SearTerm, setSearTerm] = useState<string>("");
+    const [SearchTerm, setSearTerm] = useState<string>("");
     const [filter, setFilter] = useState<string>("Tất cả");
 
     const totalCounts = {
@@ -29,9 +29,16 @@ function App() {
                     onFilterChange={setFilter}
                     totalCounts={totalCounts}
                 />
-                <SearchBar SearTerm={SearTerm} onSearchChange={setSearTerm} />
+                <SearchBar
+                    SearchTerm={SearchTerm}
+                    onSearchChange={setSearTerm}
+                />
                 <HeadingContent />
-                <MainContent courses={fakeCourses} filter={filter} SearTerm={SearTerm}/>
+                <MainContent
+                    courses={fakeCourses}
+                    filter={filter}
+                    SearchTerm={SearchTerm}
+                />
                 <Footer courses={fakeCourses} filter={filter} />
             </MainLayout>
         </>

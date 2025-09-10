@@ -14,15 +14,16 @@ interface Course {
 interface MainContentProps {
     courses: Course[];
     filter: string;
-    SearTerm: string;
+    SearchTerm: string;
 }
 
-function MainContent({ courses, filter, SearTerm }: MainContentProps) {
+function MainContent({ courses, filter, SearchTerm }: MainContentProps) {
+
     const filteredCourses = courses.filter((c) => {
         const matchFilter = filter === "Tất cả" || c.status === filter;
         const matchSearch = c.subject
             .toLowerCase()
-            .includes(SearTerm.toLowerCase());
+            .includes(SearchTerm.toLowerCase());
         return matchFilter && matchSearch;
     });
 

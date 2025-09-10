@@ -9,7 +9,7 @@ export interface Course {
     status: string;
 }
 
-export const fakeCourses: Course[] = Array.from({ length: 100 }, (_, i) => {
+export const fakeCourses: Course[] = Array.from({ length: 94 }, (_, i) => {
     const statuses = [
         "Chưa bắt đầu",
         "Đang diễn ra",

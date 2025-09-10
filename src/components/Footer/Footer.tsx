@@ -1,5 +1,4 @@
 import styles from "./styles.module.scss";
-
 interface course {
     id: number;
     subject: string;
@@ -14,18 +13,23 @@ interface course {
 interface FooterProps {
     courses: course[];
     filter: string;
+    onChangePage: (page: number) => void;
 }
-const Footer: React.FC<FooterProps> = ({ courses, filter }) => {
+function Footer({ courses, filter }: FooterProps) {
     const filteredCourses =
         filter === "Tất cả"
             ? courses
             : courses.filter((c) => c.status === filter);
-
     return (
         <div className={styles.container}>
-            Tổng số lớp: <span>{filteredCourses.length}</span>
+            <div>
+                Tổng số lớp: <span>{filteredCourses.length}</span>
+            </div>
+            <div className={styles.pagination}>
+                <button>1</button>
+            </div>
         </div>
     );
-};
+}
 
 export default Footer;

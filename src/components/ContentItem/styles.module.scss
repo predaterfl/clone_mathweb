@@ -26,3 +26,41 @@
 .Time {
     width: 250px;
 }
+.Status {
+    border: none;
+    background-color: none;
+    border-radius: 5px;
+    padding: 2.5px;
+}
+
+.StatusCancel {
+    border: none;
+    background-color: lightcoral;
+    border-radius: 5px;
+    color: red;
+    padding: 2.5px;
+}
+
+.StatusComplete {
+    border: none;
+    background-color: lightgreen;
+    border-radius: 5px;
+    color: green;
+    padding: 2.5px;
+}
+
+.StatusInprogress {
+    border: none;
+    background-color: lightyellow;
+    border-radius: 5px;
+    color: orange;
+    padding: 2.5px;
+}
+
+.StatusNotstart {
+    border: none;
+    background-color: lightgray;
+    border-radius: 5px;
+    color: gray;
+    padding: 2.5px;
+}
